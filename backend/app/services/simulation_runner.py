@@ -438,8 +438,11 @@ class SimulationRunner:
             process = subprocess.Popen(
                 cmd,
                 cwd=sim_dir,
-                stdout=main_log_file,
-                stderr=subprocess.STDOUT,  # stderr 也写入同一个文件
+               # SPIKE: tee subprocess output to parent stdout too, so Railway logs capture
+# the OASIS crash message instead of leaving it locked in the container.
+import sys as _sys
+stdout=_sys.stdout,
+stderr=_sys.stderr,
                 text=True,
                 encoding='utf-8',  # 显式指定编码
                 bufsize=1,
