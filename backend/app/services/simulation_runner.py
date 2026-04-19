@@ -440,7 +440,6 @@ class SimulationRunner:
                 cwd=sim_dir,
                # SPIKE: tee subprocess output to parent stdout too, so Railway logs capture
 # the OASIS crash message instead of leaving it locked in the container.
-import sys as _sys
 stdout=_sys.stdout,
 stderr=_sys.stderr,
                 text=True,
